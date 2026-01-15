@@ -68,7 +68,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Compte à rebours</title>
+  <title>Compte à rebours – 12 février à 19h</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -100,6 +100,7 @@
 
   <div class="countdown">
     <h1>Compte à rebours</h1>
+    <p>12 février à 19h</p>
     <div class="time" id="timer">Chargement...</div>
   </div>
 
@@ -108,7 +109,8 @@
       const now = new Date();
       let year = now.getFullYear();
 
-      let target = new Date(year, 1, 12, 19, 0, 0); // Février = 1
+      // Février = 1 (les mois commencent à 0)
+      let target = new Date(year, 1, 12, 19, 0, 0);
 
       if (now > target) {
         target = new Date(year + 1, 1, 12, 19, 0, 0);
