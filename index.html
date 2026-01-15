@@ -68,7 +68,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Compte à rebours – 12 février à 19h</title>
+  <title>Compte à rebours</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -81,27 +81,35 @@
       margin: 0;
     }
 
-    #timer {
-      font-size: 2.5rem;
-      font-weight: bold;
+    .countdown {
+      text-align: center;
       background: #020617;
-      padding: 20px 30px;
+      padding: 30px 40px;
       border-radius: 12px;
       box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    .time {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
 
-  <div id="timer">Chargement...</div>
+  <div class="countdown">
+    <h1>Compte à rebours</h1>
+    <p>Jusqu’au 12 février à 19h</p>
+    <div class="time" id="timer">Chargement...</div>
+  </div>
 
   <script>
     function getNextTargetDate() {
       const now = new Date();
       let year = now.getFullYear();
 
-      // Février = 1 (index des mois commence à 0)
-      let target = new Date(year, 1, 12, 19, 0, 0);
+      let target = new Date(year, 1, 12, 19, 0, 0); // Février = 1
 
       if (now > target) {
         target = new Date(year + 1, 1, 12, 19, 0, 0);
@@ -117,7 +125,7 @@
       const diff = targetDate - now;
 
       if (diff <= 0) {
-        document.getElementById("timer").textContent = "🎉 00 jours 00 h 00 min 00 s";
+        document.getElementById("timer").textContent = "🎉 C'est le moment !";
         return;
       }
 
@@ -136,4 +144,3 @@
 
 </body>
 </html>
-
