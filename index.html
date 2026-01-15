@@ -64,3 +64,84 @@
   </div>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Compte à rebours</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .countdown {
+      text-align: center;
+      background: #020617;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    .time {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="countdown">
+    <h1>Compte à rebours</h1>
+    <p>Jusqu’au 12 février à 19h</p>
+    <div class="time" id="timer">Chargement...</div>
+  </div>
+
+  <script>
+    function getNextTargetDate() {
+      const now = new Date();
+      let year = now.getFullYear();
+
+      let target = new Date(year, 1, 12, 19, 0, 0); // Février = 1
+
+      if (now > target) {
+        target = new Date(year + 1, 1, 12, 19, 0, 0);
+      }
+
+      return target;
+    }
+
+    const targetDate = getNextTargetDate();
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        document.getElementById("timer").textContent = "🎉 C'est le moment !";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("timer").textContent =
+        `${days} jours ${hours} h ${minutes} min ${seconds} s`;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+
+</body>
+</html>
+
