@@ -18,9 +18,9 @@ body {
     background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ffdde1, #ffc3a0);
     background-size: 400% 400%;
     animation: gradientBG 10s ease infinite;
+    text-align: center;
 }
 
-/* Animated background */
 @keyframes gradientBG {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -34,7 +34,6 @@ h1 {
     margin-bottom: 40px;
 }
 
-/* Buttons */
 .buttons {
     position: relative;
 }
@@ -49,7 +48,6 @@ button {
     transition: 0.3s ease;
 }
 
-/* YES button */
 #yes {
     background: #ff4d6d;
     color: white;
@@ -57,27 +55,35 @@ button {
     animation: pulse 1.5s infinite;
 }
 
-/* Pulsing effect */
 @keyframes pulse {
     0% { transform: scale(1); }
     50% { transform: scale(1.1); }
     100% { transform: scale(1); }
 }
 
-/* NO button */
 #no {
     background: white;
     color: #ff4d6d;
     position: absolute;
 }
 
-/* Romantic message */
 #message {
-    margin-top: 40px;
-    font-size: 2.5em;
+    margin-top: 30px;
+    font-size: 2.2em;
     color: white;
     opacity: 0;
     transition: opacity 1s ease;
+}
+
+/* Meme image */
+#meme {
+    margin-top: 30px;
+    width: 300px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.8s ease;
 }
 
 /* Floating hearts */
@@ -105,12 +111,19 @@ button {
     <button id="no">No 💔</button>
 </div>
 
-<div id="message">I knew you'd say yes... I love you ❤️✨</div>
+<div id="message">
+    I knew you'd say yes... I love you 🥂❤️
+</div>
+
+<img id="meme" 
+src="https://media.giphy.com/media/g9582DNuQppxC/giphy.gif" 
+alt="Leonardo DiCaprio Cheers Meme">
 
 <script>
 const noBtn = document.getElementById("no");
 const yesBtn = document.getElementById("yes");
 const message = document.getElementById("message");
+const meme = document.getElementById("meme");
 
 // Make NO run away randomly
 noBtn.addEventListener("mouseover", () => {
@@ -123,9 +136,14 @@ noBtn.addEventListener("mouseover", () => {
 // YES click
 yesBtn.addEventListener("click", () => {
     message.style.opacity = 1;
+    meme.style.opacity = 1;
+    meme.style.transform = "scale(1)";
+    
+    // Hide buttons after selection
+    document.querySelector(".buttons").style.display = "none";
 });
 
-// Create floating hearts
+// Floating hearts
 function createHeart() {
     const heart = document.createElement("div");
     heart.classList.add("heart");
