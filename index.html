@@ -1,146 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>For You</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #f7f6f3;
-      font-family: "Georgia", "Times New Roman", serif;
-      color: #2b2b2b;
-    }
-    .card {
-      max-width: 600px;
-      margin: 12vh auto;
-      padding: 40px 30px;
-      text-align: center;
-      line-height: 1.6;
-    }
-    h1 {
-      font-size: 1.6rem;
-      font-weight: normal;
-      margin-bottom: 30px;
-    }
-    p {
-      font-size: 1.05rem;
-      margin: 18px 0;
-    }
-    .date {
-      margin-top: 28px;
-      font-weight: bold;
-    }
-    .signature {
-      margin-top: 28px;
-      font-style: italic;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine</title>
+    <style>
+        body {
+            background-color: #ffe6e6;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+        }
+        h1 {
+            color: #ff6699;
+            font-size: 3em;
+            margin-bottom: 40px;
+        }
+        .buttons {
+            display: flex;
+            gap: 20px;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        #yes {
+            background-color: #ff99cc;
+            color: white;
+        }
+        #no {
+            background-color: #cc3366;
+            color: white;
+        }
+        @keyframes blink {
+            0%, 50%, 100% {
+                opacity: 1;
+            }
+            25%, 75% {
+                opacity: 0.3;
+            }
+        }
+        .blink {
+            animation: blink 1s infinite;
+        }
+        #message {
+            margin-top: 50px;
+            font-size: 2em;
+            color: #ff3366;
+        }
+    </style>
 </head>
 <body>
-  <div class="card">
-    <h1>Happy birthday ❤️</h1>
+    <h1>Will you be my Valentine?</h1>
+    <div class="buttons">
+        <button id="yes">Yes</button>
+        <button id="no">No</button>
+    </div>
+    <div id="message"></div>
 
-    <p>
-      I’m happy to share this moment with you.<br>
-      You are the most important person in my life.
-    </p>
+    <script>
+        const noButton = document.getElementById('no');
+        const yesButton = document.getElementById('yes');
+        const message = document.getElementById('message');
 
-    <p>
-      I hope your life is filled with happiness,<br>
-      and that you grow wisely while achieving everything you want.
-    </p>
+        // Make the "No" button move away from the mouse
+        noButton.addEventListener('mousemove', function(e) {
+            const rect = noButton.getBoundingClientRect();
+            const offsetX = e.clientX - rect.left;
+            const offsetY = e.clientY - rect.top;
+            const midX = rect.width / 2;
+            const midY = rect.height / 2;
 
-    <p class="date">
-      This is your gift —<br>
-      but you’ll experience it on February 12th.
-    </p>
+            // Calculate direction away from mouse
+            const dirX = offsetX - midX;
+            const dirY = offsetY - midY;
 
-    <p class="signature">
-      Be patient.<br>
-      I love you.
-    </p>
-  </div>
+            // Move the button away slightly
+            const moveX = dirX * 0.2;
+            const moveY = dirY * 0.2;
+            noButton.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        });
+
+        // Make Yes blink
+        yesButton.classList.add('blink');
+
+        // Handle the Yes button click
+        yesButton.addEventListener('click', function() {
+            message.textContent = "Oh, I love you!";
+        });
+
+        // Optional: Make "No" button reset if mouse leaves
+        noButton.addEventListener('mouseleave', function() {
+            noButton.style.transform = 'translate(0, 0)';
+        });
+    </script>
 </body>
 </html>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>Compte à rebours – 12 février 19h</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: #f8fafc;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
 
-    .countdown {
-      text-align: center;
-      background: #020617;
-      padding: 30px 40px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    }
-
-    .time {
-      font-size: 2rem;
-      font-weight: bold;
-      margin-top: 10px;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="countdown">
-    <h1>Compte à rebours</h1>
-    <p>Jusqu’au 12 février à 19h</p>
-    <div class="time" id="timer">Chargement...</div>
-  </div>
-
-  <script>
-    function getNextTargetDate() {
-      const now = new Date();
-      let year = now.getFullYear();
-
-      let target = new Date(year, 1, 12, 19, 0, 0); // Février = 1
-
-      if (now > target) {
-        target = new Date(year + 1, 1, 12, 19, 0, 0);
-      }
-
-      return target;
-    }
-
-    const targetDate = getNextTargetDate();
-
-    function updateCountdown() {
-      const now = new Date();
-      const diff = targetDate - now;
-
-      if (diff <= 0) {
-        document.getElementById("timer").textContent = "🎉 C'est le moment !";
-        return;
-      }
-
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-
-      document.getElementById("timer").textContent =
-        `${days} jours ${hours} h ${minutes} min ${seconds} s`;
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-  </script>
-
-</body>
-</html>
